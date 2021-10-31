@@ -1,5 +1,5 @@
 #Load tables into R
-TRACERx_all_patients <- read.csv("/Users/Kiwi/desktop/Contour_cohort/data/TRACERx all patients- June 2021.csv", sep=";") 
+T_master <- read.csv("/Users/Kiwi/desktop/Contour_cohort/data/T_file.csv", sep=";") 
 #this is the file with all patients
 contour_cohort <- read.csv("/Users/Kiwi/desktop/Contour_cohort/data/contour_cohort.csv", sep=",")
 #this is the file with your cohort. 
@@ -10,14 +10,14 @@ contour_cohort <- read.csv("/Users/Kiwi/desktop/Contour_cohort/data/contour_coho
 library(dplyr)
 help(dplyr)
 
-Filtered_table <- TRACERx_all_patients %>% filter(Shorter_ID %in% contour_cohort$Shorter_ID)
+Filtered_table <- T_master %>% filter(Shorter_ID %in% contour_cohort$Shorter_ID)
 #here you filter the "Shorter_ID" column based on the "Shorter_ID" column in the second dataframe
 
 #Second example
-list_of_IDs <- c("LTX012", "LTX085", "LTX271")
-# say you are interested in these three patients - make a list of here
+list_of_IDs <- c("12", "85", "23")
+# say you are interested in these three variables - make a list of here
 
-Filtered_table_II <- TRACERx_all_patients %>% filter(Shorter_ID %in% list_of_IDs) 
+Filtered_table_II <- T_master %>% filter(Shorter_ID %in% list_of_IDs) 
 # and select these patients based on "list_of_IDs"
 
 Filtered_table_contour <- Filtered_table %>% select(REGTrialNo, age, sex, ethnicity, NSCLCstage, radiology_N_stage, radiology_T_stage, adjuvant_treatment_given, adjuvant_treatment_YN, Lesion1_site, histology_group, pT_stage, pN_stage, pathologyTNM, pathologyTNM_code, Lesion1_size_pathology, Recurrence_date_use, date_DFS_event, cens_dfs, dfs_time, date_OS, cens_os, os_time)
